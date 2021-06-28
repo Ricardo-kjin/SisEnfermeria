@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::get('/about', function () {
     return view('about');
@@ -27,5 +27,26 @@ Route::get('/contact', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home/{id}', 'HomeController@show');
+
 Route::get('/admin', 'AdminController@index');
+
+
+/*oute::get('/servicios', 'ServicioController@index');
+Route::get('/servicios/create', 'ServicioController@create'); //retorna vista crear donde esta el formulario
+Route::get('/servicios/{id_servicio}', 'ServicioController@show');//ingresa id_servicio para buscar
+Route::post('/servicios', 'ServicioController@store');//es el tipo de peticion post laravel llama el metodo store
+Route::get('/servicios/{id_servicio}/edit', 'ServicioController@edit');//ingresa el id_servicio al metodo edit y crea una vista
+Route::patch('/servicios/{id_servicio}', 'ServicioController@update');
+Route::delete('/servicios/{id_servicio}', 'ServicioController@destroy');*/
+
+Route::resource('servicios','ServiciosController');
+Route::resource('medicamentos','MedicamentoController');
+Route::resource('insumos','InsumosController');
+Route::resource('instrumentos','InstrumentosController');
+Route::resource('turnoss','TunosController');
+//
+Route::resource('users','UsersController');//->middleware('role:Admin,enfermera,paciente,manager');
+Route::resource('roles','RolesController');//->middleware('can:isAdmin');
+
