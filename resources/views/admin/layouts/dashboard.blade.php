@@ -111,9 +111,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Login Screens:</h6>
-          <a class="dropdown-item" href="login.html">Login</a>
+          <a class="dropdown-item" href="/especialidad">Especialidad</a>
           <a class="dropdown-item" href="register.html">Registrar Enfermera</a>
-          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+          <a class="dropdown-item" href="/turnos">Turno</a>
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">Other Pages:</h6>
           <a class="dropdown-item" href="404.html">Listar Enfermera</a>
@@ -251,6 +251,8 @@
   @yield('js_medicamento_page')
   @yield('js_instrumento_page')
   @yield('js_insumo_page')
+  @yield('js_turno_page')
+
 </body>
 
 </html>

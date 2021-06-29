@@ -16,6 +16,6 @@ class Servicio extends Model
         return $this->belongsToMany(Compra::class,'compra_servicio');
     }
     public function botiquins(){
-        return $this->belongsToMany(Botiquin::class);
+        return $this->hasOne(Botiquin::class);
     }
 }

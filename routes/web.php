@@ -45,8 +45,11 @@ Route::resource('servicios','ServiciosController');
 Route::resource('medicamentos','MedicamentoController');
 Route::resource('insumos','InsumosController');
 Route::resource('instrumentos','InstrumentosController');
-Route::resource('turnoss','TunosController');
+Route::resource('turnos','TurnosController');
+Route::resource('especialidads','EspecialidadController');
 //
 Route::resource('users','UsersController');//->middleware('role:Admin,enfermera,paciente,manager');
 Route::resource('roles','RolesController');//->middleware('can:isAdmin');
 
+Route::resource('enfermeras','EnfermeraController');
+Route::resource('compras','ComprasController');

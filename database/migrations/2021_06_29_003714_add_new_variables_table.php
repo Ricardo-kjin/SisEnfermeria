@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropIdMedicamentoTipo extends Migration
+class AddNewVariablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class DropIdMedicamentoTipo extends Migration
      */
     public function up()
     {
-        Schema::table('medicamento_tipo', function (Blueprint $table) {
-            //
+        Schema::table('compras', function (Blueprint $table) {
+            $table->string('tipo_comprobante',20);
+            $table->string('serie_comprobante',7);
+            $table->string('num_comprobante',10);
+            $table->string('ubicacion',255);
         });
     }
 
@@ -25,7 +28,7 @@ class DropIdMedicamentoTipo extends Migration
      */
     public function down()
     {
-        Schema::table('medicamento_tipo', function (Blueprint $table) {
+        Schema::table('compras', function (Blueprint $table) {
             //
         });
     }

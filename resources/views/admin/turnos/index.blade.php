@@ -4,17 +4,18 @@
 
 <div class="row py-lg-2">
     <div class="col-md-6">
-        <h2>Service List</h2>
+        <h2>Turno List</h2>
     </div>
     <div class="col-md-6">
-        <a href="/servicios/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true">Crear Nuevo Servicio</a>
+        <a href="/turnos/create" class="btn btn-primary btn-lg float-md-right" role="button" aria-pressed="true">Crear Nuevo turno</a>
     </div>
 </div>
 
 <div class="card mb-3">
     <div class="card-header">
       <i class="fas fa-table"></i>
-      Data Table Example</div>
+      Data Table
+      </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -22,40 +23,36 @@
             <tr>
               <th>Id</th>
               <th>Nombre</th>
-              <th>Estado</th>
-              <th>Precio</th>
-              <th>Descripcion</th>
-              <th>Imagen</th>
+              <th>Fecha</th>
+              <th>Hora</th>
               <th>Tools</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
-              <th>Id</th>
-              <th>Nombre</th>
-              <th>Estado</th>
-              <th>Precio</th>
-              <th>Descripcion</th>
-              <th>Imagen</th>
-              <th>Tools</th>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tools</th>
             </tr>
           </tfoot>
           <tbody>
 
-                @foreach ($servicios as $servicio)
+
+
+                @foreach ($turnos as $turno)
                 <tr>
-                    <td>{{ $servicio['id'] }}</td>
-                    <td>{{ $servicio['nombre'] }}</td>
-                    <td>{{ $servicio['estado'] }}</td>
-                    <td>{{ $servicio['precio'] }}</td>
-                    <td>{!! getShorterString($servicio['descripcion'],40) !!}</td>
-                    <td><img src="{{ asset('/storage/images/servicio_image/'.$servicio['img_url'])}}" alt="{{ $servicio['img_url'] }}" width="100"></td> <!-- { $servicio['img_url'] }-->
+                    <td>{{ $turno['id'] }}</td>
+                    <td>{{ $turno['nombre'] }}</td>
+                    <td>{{ $turno['fecha'] }}</td>
+                    <td>{{ $turno['hora'] }}</td>
+
                     <td>
-                        <a href="/servicios/{{ $servicio['id'] }}"><i class="fa fa-eye"></i></a>
 
-                        <a class="fas fa-edit" href="/servicios/{{$servicio['id']}}/edit"></a>
+                        <a class="fas fa-edit" href="/turnos/{{$turno['id']}}/edit"></a>
 
-                        <a href="#"  data-toggle="modal" data-target="#deleteModal" data-servicioid="{{$servicio['id']}}" style="color:red"><i class="fas fa-trash-alt"></i></a>
+                        <a href="#"  data-toggle="modal" data-target="#deleteModal" data-turnoid="{{$turno['id']}}" style="color:red"><i class="fas fa-trash-alt"></i></a>
 
                     </td>
                 </tr>
@@ -78,13 +75,13 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "DELETE" if you are realy to delete this Servicio.</div>
+        <div class="modal-body">Select "DELETE" if you are realy to delete this turno.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <form method="POST" action="/servicios/{{$servicio->id}}">
+          <form method="POST" action="/turnos/{{$turno->id}}">
             @method('DELETE')
             @csrf
-            <input type="hidden" id="servicio_id" name="servicio_id" value="">
+            <input type="hidden" id="turno_id" name="turno_id" value="">
             <a class="btn btn-primary" onclick="$(this).closest('form').submit();">DELETE</a>
           </form>
         </div>
@@ -92,15 +89,16 @@
     </div>
   </div>
 @endsection
-@section('js_servicio_page')
+@section('js_turno_page')
+
     <script>
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget)
-          var servicio_id = button.data('servicioid')
-           // console.log(servicio_id);
+          var turno_id = button.data('turnoid')
+           // console.log(turno_id);
           var modal = $(this)
-          //modal.find('.modal-title').text('New message to ' + servicio_id)
-          modal.find('.modal-footer #servicio_id').val(servicio_id)
+          //modal.find('.modal-title').text('New message to ' + turno_id)
+          modal.find('.modal-footer #turno_id').val(turno_id)
         })
     </script>
 @endsection

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Insumo;
+use App\Especialidad;
 use Illuminate\Http\Request;
 
-class InsumosController extends Controller
+class EspecialidadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class InsumosController extends Controller
      */
     public function index()
     {
-        $insumos= Insumo::orderBy('id','asc')
+        $especialidads= Especialidad::orderBy('id','asc')
         ->get();
 
-        return view('admin.botiquin.insumos.index',['insumos'=>$insumos]);
+        return view('admin.especialidad.index',['especialidads'=>$especialidads]);
     }
 
     /**
@@ -27,7 +27,7 @@ class InsumosController extends Controller
      */
     public function create()
     {
-        return view('admin.botiquin.insumos.create');
+        return view('admin.especialidad.create');
     }
 
     /**
@@ -42,74 +42,69 @@ class InsumosController extends Controller
             'nombre'=> 'required|max:255',
             'descripcion'=>'required',
         ]);
-        $insumo=new Insumo();
+        $especialidad=new Especialidad();
 
-        $insumo->nombre=request('nombre');
-        $insumo->precio=request('precio');
-        $insumo->descripcion=request('descripcion');
+        $especialidad->nombre=request('nombre');
+        $especialidad->descripcion=request('descripcion');
 
-        $insumo->save();
-        return redirect('/insumos');
+        $especialidad->save();
+        return redirect('/especialidads');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Insumo  $insumo
+     * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
-    public function show(Insumo $insumo)
+    public function show(Especialidad $especialidad)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Insumo  $insumo
+     * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
-    public function edit(Insumo $insumo)
+    public function edit(Especialidad $especialidad)
     {
-        $insumos=Insumo::find($insumo->id);
-
-        //retornar la vista
-        return view('admin.botiquin.insumos.edit',['insumo'=>$insumos]);
+        return view('admin.especialidad.edit',['especialidad'=>$especialidad]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Insumo  $insumo
+     * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Insumo $insumo)
+    public function update(Request $request, Especialidad $especialidad)
     {
         $data=request()->validate([
             'nombre'=> 'required|max:255',
             'descripcion'=>'required',
         ]);
-        $insumo=Insumo::findOrFail($insumo->id);
+        $especialidad=Especialidad::findOrFail($especialidad->id);
 
-        $insumo->nombre=request('nombre');
-        $insumo->precio=request('precio');
-        $insumo->descripcion=request('descripcion');
+        $especialidad->nombre=request('nombre');
+        $especialidad->descripcion=request('descripcion');
 
-        $insumo->save();
-        return redirect('/insumos');
+        $especialidad->save();
+        return redirect('/especialidads');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Insumo  $insumo
+     * @param  \App\Especialidad  $especialidad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Insumo $insumo,Request $request)
+    public function destroy(Especialidad $especialidad, Request $request)
     {
-        $data=Insumo::find($request->insumo_id);
+        $data=Especialidad::find($request->especialidad_id);
         $data->delete();
-        return redirect('/insumos');
+        return redirect('/especialidads');
     }
 }

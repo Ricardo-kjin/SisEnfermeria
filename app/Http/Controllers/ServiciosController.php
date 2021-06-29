@@ -96,7 +96,10 @@ class ServiciosController extends Controller
      */
     public function show(Servicio $servicio)
     {
-        //
+        $servicios=Servicio::find($servicio->id);
+
+        //retornar la vista
+        return view('admin.servicio.show',['servicio'=>$servicios]);
     }
 
     /**

@@ -14,7 +14,9 @@ class TurnosController extends Controller
      */
     public function index()
     {
-        //
+        $turnos= Turno::orderBy('id','asc')
+        ->get();
+        return view('admin.turnos.index',['turnos'=>$turnos]);
     }
 
     /**
@@ -24,7 +26,7 @@ class TurnosController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.turnos.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class TurnosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=request()->validate([
+            'nombre'=> 'required|max:255',
+            'fecha'=>'required',
+            'hora'=>'required',
+        ]);
+        $turno=new Turno();
+
+        $turno->nombre=request('nombre');
+        $turno->fecha=request('fecha');
+        $turno->hora=request('hora');
+
+        $turno->save();
+        return redirect('/turnos');
     }
 
     /**
@@ -57,7 +71,10 @@ class TurnosController extends Controller
      */
     public function edit(Turno $turno)
     {
-        //
+        $turnos=Turno::find($turno->id);
+
+        //retornar la vista
+        return view('admin.turnos.edit',['turno'=>$turnos]);
     }
 
     /**
@@ -69,7 +86,19 @@ class TurnosController extends Controller
      */
     public function update(Request $request, Turno $turno)
     {
-        //
+        $data=request()->validate([
+            'nombre'=> 'required|max:255',
+            'fecha'=>'required',
+            'hora'=>'required',
+        ]);
+        $turno=Turno::findOrFail($turno->id);
+
+        $turno->nombre=request('nombre');
+        $turno->fecha=request('fecha');
+        $turno->hora=request('hora');
+
+        $turno->save();
+        return redirect('/turnos');
     }
 
     /**
@@ -78,8 +107,10 @@ class TurnosController extends Controller
      * @param  \App\Turno  $turno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Turno $turno)
+    public function destroy(Turno $turno,Request $request)
     {
-        //
+        $data=Turno::find($request->turno_id);
+        $data->delete();
+        return redirect('/turnos');
     }
 }
